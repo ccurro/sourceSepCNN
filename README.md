@@ -8,5 +8,5 @@ Work in Progress
 * Torch 7 (latest as of Spring 2015)
 * Torch packages (install with luarocks) 
  * nn, cunn, nnx
- * audio,signal
+ * audio, signal
  * gnuplot
