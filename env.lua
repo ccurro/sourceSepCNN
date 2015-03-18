@@ -11,3 +11,4 @@ require 'audio'
 require 'signal'
 require 'gnuplot'
 require('sampleGen/randMixture.lua')
+require('SuperCriterion.lua')
