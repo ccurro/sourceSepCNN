@@ -1,4 +1,4 @@
-Source Seperation of Neural Networks
+Source Seperation with Neural Networks
 ------------------------------------
 
 Work in Progress
