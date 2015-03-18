@@ -3,7 +3,7 @@
 	dofile('test/test_criterion.lua')
 ]]
 
-
+dofile('env.lua')
 dofile('criterion.lua')
 
 output = {}

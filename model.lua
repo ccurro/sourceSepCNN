@@ -29,7 +29,82 @@
 
 --[[
 	For right now I'm going to construct a model that
-	has nn.Identity() layers that'll just pass the input
+	has nn.Select() layers that'll just pass the input
 	straight to output so we can test structural details.
 ]]
 
+model = nn.Sequential()
+
+paths = {}
+paths[1] = nn.Sequential()
+paths[2] = nn.Sequential()
+paths[3] = nn.Sequential()
+paths[4] = nn.Sequential()
+
+paths[1]:add(nn.JoinTable(1))
+paths[1]:add(nn.Select(1,1)) 
+paths[1]:add(nn.View(1,100))
+--[[
+	nn.Select brings it back down to 1
+	channel. Pretend this is MLP
+
+	View goes from Tensor(100) to Tensor(1,100)
+	Keeps consistent with other paths
+]]
+
+paths[2]:add(nn.JoinTable(1))
+paths[2]:add(nn.Select(1,2))
+paths[2]:add(nn.View(1,100))
+--[[
+	nn.Select brings it back down to 1
+	channel. Pretend this is MLP
+
+	View goes from Tensor(100) to Tensor(1,100)
+	Keeps consistent with other paths
+]]
+
+paths[3]:add(nn.SelectTable(1))
+paths[3]:add(nn.Identity())
+
+
+paths[4]:add(nn.SelectTable(2))
+paths[4]:add(nn.Identity())
+
+tree = nn.ConcatTable()
+tree:add(paths[1])
+tree:add(paths[2])
+tree:add(paths[3])
+tree:add(paths[4])
+
+model:add(tree)
+
+critPaths = {}
+
+critPaths[1] = nn.ConcatTable()
+critPaths[1]:add(nn.SelectTable(1))
+critPaths[1]:add(nn.SelectTable(2))
+
+critPaths[2] = nn.ConcatTable()
+critPaths[2]:add(nn.SelectTable(1))
+critPaths[2]:add(nn.SelectTable(3))
+
+critPaths[3] = nn.ConcatTable()
+critPaths[3]:add(nn.SelectTable(1))
+critPaths[3]:add(nn.SelectTable(4))
+
+critPaths[4] = nn.ConcatTable()
+critPaths[4]:add(nn.SelectTable(2))
+critPaths[4]:add(nn.SelectTable(3))
+
+critPaths[5] = nn.ConcatTable()
+critPaths[5]:add(nn.SelectTable(2))
+critPaths[5]:add(nn.SelectTable(4))
+
+critTree = nn.ConcatTable()
+critTree:add(critPaths[1])
+critTree:add(critPaths[2])
+critTree:add(critPaths[3])
+critTree:add(critPaths[4])
+critTree:add(critPaths[5])
+
+model:add(critTree)
