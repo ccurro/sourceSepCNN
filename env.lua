@@ -4,7 +4,7 @@ require 'cunn'
 -- require 'nnx'
 --[[
 	Disabled nnx while we work on a fork of 
-	nnx.SuperCriterion() due to it's limitations
+	nnx.SuperCriterion() due to its limitations
 	working with table criteria.
 ]]
 require 'audio'
