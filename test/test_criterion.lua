@@ -1,3 +1,9 @@
+--[[
+	Run this file from root dir of repository with
+	dofile('test/test_criterion.lua')
+]]
+
+
 dofile('criterion.lua')
 
 output = {}
