@@ -33,7 +33,7 @@
 		Table 1 - Similarity 		
 ]]
 
-criterion == nn.SuperCriterion()
+criterion = nn.SuperCriterion()
 -- ^ Can input weights to determine how objectives are combined.
 -- For now we'll start with 5 equally weighted cosine similarities
 criterion:add(nn.CosineEmbeddingCriterion())
