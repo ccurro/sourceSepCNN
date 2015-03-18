@@ -18,7 +18,7 @@
 			Mix   Channel 1
 		Table 5 
 			Demix Channel 2
-			Mix   Channel 1
+			Mix   Channel 2
 
 	The input to the model should follow this diagram:
 
@@ -26,3 +26,10 @@
 		Mix Channel 1
 		Mix Channel 2
 ]]
+
+--[[
+	For right now I'm going to construct a model that
+	has nn.Identity() layers that'll just pass the input
+	straight to output so we can test structural details.
+]]
+

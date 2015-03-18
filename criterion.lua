@@ -19,7 +19,7 @@
 			Mix   Channel 1
 		Table 5 
 			Demix Channel 2
-			Mix   Channel 1
+			Mix   Channel 2
 
 	We have a different objective to maximize for each table.
 	We may want to set weights for each and determine if any of
