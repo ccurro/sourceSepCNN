@@ -6,6 +6,7 @@ function getMixture(n)
 	local duration = 0.1 -- Length of Mixture in time
 	local t = torch.linspace(0,duration,duration*fs) -- Generate time index
 	local x = {}
+	-- local x = torch.Tensor(2,duration*fs)
 	f = torch.randperm(10):mul(1e3) --[[
 		generate random frequenies on discrete set of
 		{1e3..1e4} increment by 1e3

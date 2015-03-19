@@ -33,6 +33,15 @@
 	straight to output so we can test structural details.
 ]]
 
+demixMLP = {}
+
+demixMLP[1] = nn.Sequential()
+demixMLP[1]:add(nn.SpatialConvolution(1,1,2,1))
+
+demixMLP[2] = nn.Sequential()
+demixMLP[2]:add(nn.SpatialConvolution(1,1,2,1))
+
+
 model = nn.Sequential()
 
 paths = {}
@@ -42,8 +51,9 @@ paths[3] = nn.Sequential()
 paths[4] = nn.Sequential()
 
 paths[1]:add(nn.JoinTable(1))
-paths[1]:add(nn.Select(1,1)) 
-paths[1]:add(nn.View(1,100))
+paths[1]:add(nn.View(1,signalLength,2))
+paths[1]:add(demixMLP[1]) 
+paths[1]:add(nn.Reshape(1,signalLength,false))
 --[[
 	nn.Select brings it back down to 1
 	channel. Pretend this is MLP
@@ -53,8 +63,9 @@ paths[1]:add(nn.View(1,100))
 ]]
 
 paths[2]:add(nn.JoinTable(1))
-paths[2]:add(nn.Select(1,2))
-paths[2]:add(nn.View(1,100))
+paths[2]:add(nn.View(1,signalLength,2))
+paths[2]:add(demixMLP[2]) 
+paths[2]:add(nn.Reshape(1,signalLength,false))
 --[[
 	nn.Select brings it back down to 1
 	channel. Pretend this is MLP
@@ -65,10 +76,11 @@ paths[2]:add(nn.View(1,100))
 
 paths[3]:add(nn.SelectTable(1))
 paths[3]:add(nn.Identity())
-
+paths[3]:add(nn.Reshape(1,signalLength,false))
 
 paths[4]:add(nn.SelectTable(2))
 paths[4]:add(nn.Identity())
+paths[4]:add(nn.Reshape(1,signalLength,false))
 
 tree = nn.ConcatTable()
 tree:add(paths[1])
