@@ -10,7 +10,7 @@ output = {}
 channels = {}
 
 for i = 1,4 do
-	channels[i] = torch.randn(100)
+	channels[i] = torch.randn(1,100)
 end
 
 --[[
@@ -20,19 +20,11 @@ end
 	channels[4] = Mix   2
 ]]
 
-output[1] = {channels[1],channels[2]}
-output[2] = {channels[1],channels[3]}
-output[3] = {channels[1],channels[4]}
-output[4] = {channels[2],channels[3]}
-output[5] = {channels[2],channels[4]}
+output[1] = torch.cat(channels[1],channels[2],1)
+output[2] = torch.cat(channels[1],channels[3],1)
+output[3] = torch.cat(channels[1],channels[4],1)
+output[4] = torch.cat(channels[2],channels[3],1)
+output[5] = torch.cat(channels[2],channels[4],1)
 
 criterion:forward(output,targets)
 criterion:backward(output,targets)
---[[
-	criterion:backward() fails b/c nnx.SuperCriterion() expects
-	output[i] to be a tensor and not a table. It is not robust
-	to the other table criteria. I suppose that's part of the 
-	reason it is in nnx and not nn.
-
-	We may have to fork nnx.SuperCriterion()
-]]

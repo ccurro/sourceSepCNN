@@ -1,14 +1,9 @@
 require 'nn'
 require 'cutorch'
 require 'cunn'
--- require 'nnx'
---[[
-	Disabled nnx while we work on a fork of 
-	nnx.SuperCriterion() due to its limitations
-	working with table criteria.
-]]
+require 'nnx'
 require 'audio'
 require 'signal'
 require 'gnuplot'
 require('sampleGen/randMixture.lua')
-require('SuperCriterion.lua')
+dofile('CosineCriterion.lua')

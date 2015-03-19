@@ -80,25 +80,25 @@ model:add(tree)
 
 critPaths = {}
 
-critPaths[1] = nn.ConcatTable()
-critPaths[1]:add(nn.SelectTable(1))
-critPaths[1]:add(nn.SelectTable(2))
+critPaths[1] = nn.Sequential()
+critPaths[1]:add(nn.ConcatTable():add(nn.SelectTable(1)):add(nn.SelectTable(2)))
+critPaths[1]:add(nn.JoinTable(1))
 
-critPaths[2] = nn.ConcatTable()
-critPaths[2]:add(nn.SelectTable(1))
-critPaths[2]:add(nn.SelectTable(3))
+critPaths[2] = nn.Sequential()
+critPaths[2]:add(nn.ConcatTable():add(nn.SelectTable(1)):add(nn.SelectTable(3)))
+critPaths[2]:add(nn.JoinTable(1))
 
-critPaths[3] = nn.ConcatTable()
-critPaths[3]:add(nn.SelectTable(1))
-critPaths[3]:add(nn.SelectTable(4))
+critPaths[3] = nn.Sequential()
+critPaths[3]:add(nn.ConcatTable():add(nn.SelectTable(1)):add(nn.SelectTable(4)))
+critPaths[3]:add(nn.JoinTable(1))
 
-critPaths[4] = nn.ConcatTable()
-critPaths[4]:add(nn.SelectTable(2))
-critPaths[4]:add(nn.SelectTable(3))
+critPaths[4] = nn.Sequential()
+critPaths[4]:add(nn.ConcatTable():add(nn.SelectTable(2)):add(nn.SelectTable(3)))
+critPaths[4]:add(nn.JoinTable(1))
 
-critPaths[5] = nn.ConcatTable()
-critPaths[5]:add(nn.SelectTable(2))
-critPaths[5]:add(nn.SelectTable(4))
+critPaths[5] = nn.Sequential()
+critPaths[5]:add(nn.ConcatTable():add(nn.SelectTable(2)):add(nn.SelectTable(4)))
+critPaths[5]:add(nn.JoinTable(1))
 
 critTree = nn.ConcatTable()
 critTree:add(critPaths[1])

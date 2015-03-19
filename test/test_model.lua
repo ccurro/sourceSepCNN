@@ -15,4 +15,6 @@ end
 
 x = model:forward(channels)
 y = criterion:forward(x,targets)
+model:backward(channels,criterion:backward(x,targets))
+
 
